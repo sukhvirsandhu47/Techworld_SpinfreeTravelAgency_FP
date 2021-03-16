@@ -1,0 +1,50 @@
+#container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+body
+{
+    background-color: #f5f5dc;
+}
+
+footer {
+    
+    text-align: center;
+    margin-top: 2em;
+   
+}
+.desktop {
+    display: none;
+}
+
+#headerimg {
+    width: 20%;
+    height: 10%;    
+    vertical-align: middle;
+}
+header {     
+    background-color: #fff;
+    border-radius: 0.5em;    
+}
+h1#headertitle
+{
+    color: maroon;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    
+}
+
+nav {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -1.5em;
+}
+
+nav ul {
+    padding: 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
