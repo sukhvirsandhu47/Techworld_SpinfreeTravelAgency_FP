@@ -41,4 +41,103 @@ window.onload = function() {
    objectStore.createIndex('usrgen', 'usrgen', { unique: false });
    objectStore.createIndex('usrcomments', 'usrcomments', { unique: false });
    
+    ///////////
+   let objectStore2 = db.createObjectStore('sessions', { keyPath: 'sessionusrid'});
+   objectStore2.createIndex('date', 'date', { unique: false });
+//////////////////
+//
+//
+let objectStore3 = db.createObjectStore('flightbooking', { keyPath: 'id', autoIncrement:true });
+objectStore3.createIndex('usrid', 'usrid', { unique: false });   
+objectStore3.createIndex('flightfrom', 'flightfrom', { unique: false });
+objectStore3.createIndex('flightto', 'flightto', { unique: false });
+objectStore3.createIndex('flightdate', 'flightdate', { unique: false });
+objectStore3.createIndex('flightpassengers', 'flightpassengers', { unique: false });
+//
+let objectStore4 = db.createObjectStore('hotelbooking',  { keyPath: 'id', autoIncrement:true });
+objectStore4.createIndex('usrid', 'usrid', { unique: false });   
+objectStore4.createIndex('hotelfrom', 'hotelfrom', { unique: false });
+objectStore4.createIndex('hotelto', 'hotelto', { unique: false });
+objectStore4.createIndex('hotelname', 'hotelname', { unique: false });
+objectStore4.createIndex('cityname', 'cityname', { unique: false });
+//
+////////////////
+    console.log('Database setup complete');
+   // alert("setup done");
+  };
+
+  // Create an onsubmit handler so that when the form is submitted the addData() function is run
+  form.onsubmit = logincheck;
+
+  // Define the logincheck() function
+  function logincheck(e) {
+    // prevent default - we don't want the form to submit in the conventional way
+    e.preventDefault();
+
+    // open a read/write db transaction, ready for adding the data
+    let transaction = db.transaction(['users'], 'readonly');
+
+    let objectStore = transaction.objectStore('users');
+    var request = objectStore.get(usrIdInput.value);
+
+    request.onsuccess = function(e) {
+        var result = e.target.result;
+        //alert(result);
+        if(typeof(result) == "undefined")
+        {
+          console.log("Invalid Userid");
+          alert("Invalid ID...");
+        }
+        else{
+        if(result.usrpwd == usrpwd.value)
+        {
+          console.log("Login successful");
+          alert("Login Successful !!");
+
+           sessioninfo();
+        }
+        else
+        {
+          console.log("Invalid Password");
+          alert("Invalid Password !!");
+        }
+      }
+        console.dir(result);
+    }
+  request.onerror = function(e) {
+        console.log("Invalid ID");
+        console.dir(e);
+    }
+    }
 };
+
+function sessioninfo()
+{
+  let transaction = db.transaction(['sessions'], 'readwrite');
+
+    // call an object store that's already been added to the database
+    let objectStore = transaction.objectStore('sessions');
+     objectStore.clear();
+    let today = new Date().toISOString().slice(0, 10);
+
+    let newItem = { sessionusrid: usrIdInput.value,date: today  };
+    
+
+
+
+    // Make a request to add our newItem object to the object store
+    var request = objectStore.add(newItem);
+    request.onsuccess = function() {
+      window.location.href = "home.html";     
+    };
+
+    // Report on the success of the transaction completing, when everything is done
+    transaction.oncomplete = function() {
+      console.log('Transaction completed: database modification finished.');
+      
+    };
+
+    transaction.onerror = function() {
+      console.log('Transaction not opened due to error');
+    };
+}
