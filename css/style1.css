@@ -48,3 +48,157 @@ nav ul {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
+
+/* styles for the li in the ul in the nav */
+nav li {
+    /* background-color: #009933; */
+    background-color: #9d9d93;
+    margin: 0.3em;
+    padding: 0.4em;
+    list-style-type:none;
+}
+
+/* styles for the anchor elements inside the li inside nav */
+nav li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    margin-top: 0.5em;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 2em 0 2em 0;
+    opacity: 0.85;
+}
+
+
+/* style for input, textearea etc */
+input, select, textarea {
+    display: block;
+    margin-bottom: 1em;
+}
+
+/* style for the label */
+label {
+    display: block;
+}
+
+/* styel for the ul inside the form */
+form ul {
+    list-style-type: none;
+}
+
+.chkbx {
+    display: inline-block;
+}
+
+.gender label {
+    text-align: left;
+    color: #000;
+    width: fit-content;
+    padding-right: 1em;
+}
+
+.gender p {
+    margin: 0;
+    padding-right: 1em;
+}
+
+.gender {
+    display: flex;
+}
+
+form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form fieldset {
+    padding: 0.5em;
+} 
+
+form p > small {
+    display: block;
+}
+
+
+.gender {
+    flex-direction: column;
+}
+.gender > div {
+    flex-direction: row;
+    margin-left: 5em;
+}
+
+
+
+/* media query for the desktop view port */
+@media only screen and (min-width: 970px) {
+    h1#headertitle
+{
+    color: maroon;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: inline;
+}
+    /* styles for the li inside the nav */
+    nav li {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 10;
+        width: 20%;
+        display: inline;
+    }
+    /* styles for the links in the li in nav */
+    nav li a {
+        display: inline-block;
+        padding: .7em;        
+        padding-right: 2em;
+        padding-left: 2em;
+    }
+    nav ul {     
+        padding-left: 0.5%;
+        padding-right: 0.5%;
+    }
+    /* style for header of desktop view port */
+    header {
+        text-align: left;
+    }
+
+    /* style for the nav */
+    nav {
+        float: left;        
+        width: 100%;       
+        background-color: white;
+    }
+    .desktop {
+        display: block;
+    }
+  img#bannerimg
+   {
+       width: 100%;       
+   }
+   main {
+    border-radius: 0.5em;
+    box-shadow: 0.5em 0.5em 0.5em #404040;
+    margin-bottom: 1em;
+    margin-top: 1em;  
+}
+
+form {
+    background-color: #fff;
+    padding: 1em;
+    margin: 1em;
+}
+
+form p {
+    color: #000;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+}
+}
+
