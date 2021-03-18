@@ -156,3 +156,30 @@ function fetchsession() {
 
 
  
+ function deleteFlight(e) {
+  
+  let noteId = Number(e.target.parentNode.getAttribute('flight-id'));
+
+  // open a database transaction and delete the task, finding it using the id we retrieved above
+  let transaction = db.transaction(['flightbooking'], 'readwrite');
+  let objectStore = transaction.objectStore('flightbooking');
+  let request = objectStore.delete(noteId);
+
+  // report that the data item has been deleted
+  transaction.oncomplete = function() {
+    // delete the parent of the button
+    // which is the list item, so it is no longer displayed
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    console.log('Flight ' + noteId + ' deleted.');
+
+    // Again, if list item is empty, display a 'No notes stored' message
+    if(!list.firstChild) {
+      const listItem = document.createElement('li');
+      listItem.textContent = 'No Flights booked.';
+      list.appendChild(listItem);
+    }
+  };
+}
+
+
+
