@@ -85,7 +85,7 @@ function fetchsession() {
       }
       else
       {
-       // alert("Session exists !!");
+        alert("Session exists !!");
       }
   }
 }
