@@ -125,6 +125,7 @@ e.preventDefault();
 function fetchsession() {
 
   let objectStore = db.transaction('sessions').objectStore('sessions');
+//  let objectStore = db.transaction('sessions').objectStore('sessions');
   objectStore.openCursor().onsuccess = function(e) {
     // Get a reference to the cursor
     let cursor = e.target.result;
