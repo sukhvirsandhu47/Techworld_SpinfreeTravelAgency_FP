@@ -183,3 +183,62 @@ function fetchsession() {
 
 
 
+
+function displayHotelData() {
+  // Here we empty the contents of the list element each time the display is updated
+  // If you ddn't do this, you'd get duplicates listed each time a new note is added
+  while (hotellist.firstChild) {
+    hotellist.removeChild(hotellist.firstChild);
+  }
+
+  // Open our object store and then get a cursor - which iterates through all the
+  // different data items in the store
+  let objectStore = db.transaction('hotelbooking').objectStore('hotelbooking');
+  objectStore.openCursor().onsuccess = function(e) {
+    // Get a reference to the cursor
+    let cursor = e.target.result;
+
+    // If there is still another data item to iterate through, keep running this code
+    if(cursor) {
+      // Create a list item, h3, and p to put each data item inside when displaying it
+      // structure the HTML fragment, and append it inside the list
+      const listItem = document.createElement('li');
+      const h3 = document.createElement('h3');
+      const para = document.createElement('p');
+
+      listItem.appendChild(h3);
+      listItem.appendChild(para);
+      hotellist.appendChild(listItem);
+
+      // Put the data from the cursor inside the h3 and para
+      //h3.textContent = cursor.value.usrid;
+      
+      para.textContent = cursor.value.hotelfrom +" ---> " + cursor.value.hotelto;
+     
+      h3.textContent = cursor.value.hotelname + ", " + cursor.value.cityname;
+      
+      listItem.setAttribute('hotel-id', cursor.value.id);
+
+      // Create a button and place it inside each listItem
+      const deleteBtn = document.createElement('button');
+      listItem.appendChild(deleteBtn);
+      deleteBtn.textContent = 'Delete';
+
+      // Set an event handler so that when the button is clicked, the deleteItem()
+      // function is run
+      deleteBtn.onclick = deleteHotel;
+
+      // Iterate to the next item in the cursor
+      cursor.continue();
+    } else {
+      
+      if(!hotellist.firstChild) {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'No Hotel Bookings.'
+        hotellist.appendChild(listItem);
+      }
+      
+      console.log('All Hotel bookings displayed');
+    }
+  };
+}
