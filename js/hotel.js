@@ -51,3 +51,71 @@ window.onload = function() {
     
    let objectStore2 = db.createObjectStore('sessions', { keyPath: 'sessionusrid'});
    objectStore2.createIndex('date', 'date', { unique: false });
+//
+//
+let objectStore3 = db.createObjectStore('flightbooking', { keyPath: 'id', autoIncrement:true });
+objectStore3.createIndex('usrid', 'usrid', { unique: false });   
+objectStore3.createIndex('flightfrom', 'flightfrom', { unique: false });
+objectStore3.createIndex('flightto', 'flightto', { unique: false });
+objectStore3.createIndex('flightdate', 'flightdate', { unique: false });
+objectStore3.createIndex('flightpassengers', 'flightpassengers', { unique: false });
+//
+let objectStore4 = db.createObjectStore('hotelbooking',  { keyPath: 'id', autoIncrement:true });
+objectStore4.createIndex('usrid', 'usrid', { unique: false });   
+objectStore4.createIndex('hotelfrom', 'hotelfrom', { unique: false });
+objectStore4.createIndex('hotelto', 'hotelto', { unique: false });
+objectStore4.createIndex('hotelname', 'hotelname', { unique: false });
+objectStore4.createIndex('cityname', 'cityname', { unique: false });
+//
+//
+    console.log('Database setup complete');
+  //  alert("setup done");
+  };
+  // Create an onsubmit handler so that when the form is submitted the addData() function is run
+  form.onsubmit = addData;
+
+  // Define the addData() function
+  function addData(e) {
+// prevent default - we don't want the form to submit in the conventional way
+e.preventDefault();
+   
+    // grab the values entered into the form fields and store them in an object ready for being inserted into the DB
+    let newItem = { usrid: usrIdInput.value, hotelfrom: hotelfromInput.value,
+                    hotelto:  hoteltoInput.value, hotelname: hotelnameInput.value,
+                    cityname: citynameInput.value};
+
+    // open a read/write db transaction, ready for adding the data
+    let transaction = db.transaction(['hotelbooking'], 'readwrite');
+
+    // call an object store that's already been added to the database
+    let objectStore = transaction.objectStore('hotelbooking');
+
+    // Make a request to add our newItem object to the object store
+    var request = objectStore.add(newItem);
+    request.onsuccess = function() {
+      alert("Booking Completed !!");
+     
+     hotelfromInput.value ="";
+     hoteltoInput.value="";
+     citynameInput.value = "";
+     hotelnameInput.value="";
+     
+    };
+
+    // Report on the success of the transaction completing, when everything is done
+    transaction.oncomplete = function() {
+      console.log('Transaction completed: database modification finished.');
+      
+    };
+
+    transaction.onerror = function() {
+      console.log('Transaction not opened due to error');
+    };
+   
+
+
+  }
+
+
+
+};
