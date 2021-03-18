@@ -117,3 +117,26 @@ e.preventDefault();
 
 
 };
+
+// Define the fetchsession()
+  
+function fetchsession() {
+
+  let objectStore = db.transaction('sessions').objectStore('sessions');
+  objectStore.openCursor().onsuccess = function(e) {
+    // Get a reference to the cursor
+    let cursor = e.target.result;
+      console.log(cursor);       
+      if(cursor==null) 
+      {
+            alert("Can't proceed without login...Redirecting to login page");
+            window.location.href = "index.html";   
+      }
+      else
+      {
+        usrIdInput.value = cursor.key;
+        usrIdInput.readOnly = "true";
+      //  alert("Session exists !!");
+      }
+  }
+}
