@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/style1.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpinFree Travel Agency</title>
+    
+    <script src="js/flight.js" defer></script>
+</head>
+<body>
+  <div id="container" class="text-color">
+    <header>
+        <a href="index.html">
+          <img src="images/logo.jpg" alt="Travel logo" id="headerimg">
+        </a>
+        <h1 id="headertitle">SPINFREE TRAVEL AGENCY</h1>
+    </header>
+    <br>
+    <nav>
+      <ul>
+          <li><a href="home.html">Home </a></li>
+          <li><a href="flight.html">Flight Booking </a></li>
+          <li><a href="hotel.html">Hotel Booking </a></li>
+          <li><a href="bookings.html">My Bookings </a></li>
+          <li><a href="logout.html">Logout </a></li>
+      </ul>
+  </nav>
+  <div id="banner" class="desktop">
+    <img src="images/banner.jpg" alt="home banner image" id="bannerimg">
+  </div>
+
+  <main>
+    <h2>Register today.</h2>
+    <h2>Complete the form for Flight Booking!</h2>
+    <form>
+        <fieldset>
+            <legend>Please fill the following form</legend>
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="flightfrom">From:</label>
+            <input type="text" name="flightfrom" id="flightfrom" required>
+
+            <label for="flightto">To:</label>
+            <input type="text" name="flightto" id="flightto" required>
+           
+            <label for="flightdate">Departure Date:</label>
+            <input type="date" name="flightdate" id="flightdate" required>
+           
+            <label for="flightpassengers">Number of Passengers:</label>
+            <input type="number" name="flightpassengers" id="flightpassengers" min="1" max="10" 
+            step="1" value="1" />
+           
+           
+            
+                <button id="regBtn" class="btn" >Book Flight</button>
+                
+          
+        </fieldset>
+    </form>
+   
+</main>
+
+ <!-- the area for the footer content -->
+ <footer>
+    <div id="copyright">
+        <p>
+            &copy; Copyright 2021. All Rights Rederved <br>
+            
+        </p>
+    </div>
+    
+</footer>
+
+  </div>
+</body>
+</html>
