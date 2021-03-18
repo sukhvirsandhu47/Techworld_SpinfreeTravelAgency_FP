@@ -242,3 +242,28 @@ function displayHotelData() {
     }
   };
 }
+
+
+
+
+function deleteHotel(e) {
+  
+  let noteId = Number(e.target.parentNode.getAttribute('hotel-id'));
+  
+  let transaction = db.transaction(['hotelbooking'], 'readwrite');
+  let objectStore = transaction.objectStore('hotelbooking');
+  let request = objectStore.delete(noteId);
+  
+  transaction.oncomplete = function() {
+   
+    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    console.log('Hotel ' + noteId + ' deleted.');
+
+    if(!hotellist.firstChild) {
+      const listItem = document.createElement('li');
+      listItem.textContent = 'No Hotel booked.';
+      hotellist.appendChild(listItem);
+    }
+  };
+}
+
