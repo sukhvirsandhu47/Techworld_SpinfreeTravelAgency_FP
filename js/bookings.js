@@ -26,3 +26,46 @@ window.onload = function() {
     displayData();
     displayHotelData();
   };
+   // Setup the database tables if this has not already been done
+   request.onupgradeneeded = function(e) {
+
+    // Grab a reference to the opened database
+    let db = e.target.result;
+
+   let objectStore = db.createObjectStore('users', { keyPath: 'usrid'});
+
+   
+   objectStore.createIndex('usrpwd', 'usrpwd', { unique: false });
+   objectStore.createIndex('usrname', 'usrname', { unique: false });
+   objectStore.createIndex('usrurl', 'usrurl', { unique: false });
+   objectStore.createIndex('usrbirth', 'usrbirth', { unique: false });
+   objectStore.createIndex('usrgen', 'usrgen', { unique: false });
+   objectStore.createIndex('usrcomments', 'usrcomments', { unique: false });
+   
+    
+   let objectStore2 = db.createObjectStore('sessions', { keyPath: 'sessionusrid'});
+   objectStore2.createIndex('date', 'date', { unique: false });
+///////////////
+//
+//
+let objectStore3 = db.createObjectStore('flightbooking', { keyPath: 'id', autoIncrement:true });
+objectStore3.createIndex('usrid', 'usrid', { unique: false });   
+objectStore3.createIndex('flightfrom', 'flightfrom', { unique: false });
+objectStore3.createIndex('flightto', 'flightto', { unique: false });
+objectStore3.createIndex('flightdate', 'flightdate', { unique: false });
+objectStore3.createIndex('flightpassengers', 'flightpassengers', { unique: false });
+//
+let objectStore4 = db.createObjectStore('hotelbooking',  { keyPath: 'id', autoIncrement:true });
+objectStore4.createIndex('usrid', 'usrid', { unique: false });   
+objectStore4.createIndex('hotelfrom', 'hotelfrom', { unique: false });
+objectStore4.createIndex('hotelto', 'hotelto', { unique: false });
+objectStore4.createIndex('hotelname', 'hotelname', { unique: false });
+objectStore4.createIndex('cityname', 'cityname', { unique: false });
+//
+    console.log('Database setup complete');
+   // alert("setup done");
+  };
+
+
+
+};
